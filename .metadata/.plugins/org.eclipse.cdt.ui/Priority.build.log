@@ -1,0 +1,10 @@
+15:06:32 **** Incremental Build of configuration Debug for project Priority ****
+make -j12 all 
+arm-none-eabi-size  Priority.elf 
+   text	   data	    bss	    dec	    hex	filename
+   3648	    112	   1904	   5664	   1620	Priority.elf
+Finished building: default.size.stdout
+ 
+
+15:06:32 Build Finished. 0 errors, 0 warnings. (took 171ms)
+

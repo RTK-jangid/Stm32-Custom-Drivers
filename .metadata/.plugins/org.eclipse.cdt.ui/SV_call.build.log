@@ -1,0 +1,10 @@
+23:30:46 **** Incremental Build of configuration Debug for project SV_call ****
+make -j12 all 
+arm-none-eabi-size  SV_call.elf 
+   text	   data	    bss	    dec	    hex	filename
+   5308	    100	   1900	   7308	   1c8c	SV_call.elf
+Finished building: default.size.stdout
+ 
+
+23:30:47 Build Finished. 0 errors, 0 warnings. (took 170ms)
+

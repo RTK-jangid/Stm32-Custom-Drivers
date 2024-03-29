@@ -1,0 +1,351 @@
+/*
+ * stm32f407xx.h
+ *
+ *  Created on: Feb 23, 2024
+ *      Author: ritik
+ */
+#include<stdint.h>
+#include<stddef.h>
+#ifndef INC_STM32F407XX_H_
+#define INC_STM32F407XX_H_
+
+#define __weak						__attribute__((weak))
+
+#define EXTI						0x40013C00U
+#define SYSCFG						0x40013800U
+
+#define NO_BITS_PR_IMPLEMENTED		4
+
+#define NVIC_ISER0					((uint32_t*)0xE000E100)
+#define NVIC_ISER1					((uint32_t*)0xE000E104)
+#define NVIC_ISER2					((uint32_t*)0xE000E108)
+#define NVIC_ISER3					((uint32_t*)0xE000E10c)
+
+#define NVIC_ICER0					((uint32_t*)0xE000E180)
+#define NVIC_ICER1					((uint32_t*)0xE000E184)
+#define NVIC_ICER2					((uint32_t*)0xE000E188)
+#define NVIC_ICER3					((uint32_t*)0xE000E18c)
+
+#define NVIC_IPR					((uint32_t*)0xE000E400)
+
+#define GPIOA						0x40020000U
+#define GPIOB						0x40020400U
+#define GPIOC						0x40020800U
+#define GPIOD						0x40020C00U
+#define GPIOE						0x40021000U
+#define GPIOF						0x40021400U
+#define GPIOG						0x40021800U
+#define GPIOH						0x40021C00U
+#define GPIOI						0x40022000U
+
+
+#define SPI1						0x40013000U
+#define SPI2						0x40003800U
+#define SPI3						0x40003C00U
+
+
+#define I2C1						0x40005400U
+#define I2C2						0x40005800U
+#define I2C3						0x40005C00U
+
+#define USART1						0x40011000U
+#define USART2						0x40004400U
+#define USART3						0x40004800U
+#define UART4						0x40004C00U
+#define UART5						0x40005000U
+#define USART6						0x40011400U
+
+#define RCC 						0x40023800U
+
+
+
+typedef struct {
+	volatile uint32_t MODER;
+	volatile uint32_t OTYPER;
+	volatile uint32_t OSPEEDR;
+	volatile uint32_t PUPDR;
+	volatile uint32_t IDR;
+	volatile uint32_t ODR;
+	volatile uint32_t BSRR;
+	volatile uint32_t LCKR;
+	volatile uint32_t AFR[2];
+}GPIOx_Reg_t;
+
+typedef struct{
+	volatile uint32_t CR1;
+	volatile uint32_t CR2;
+	volatile uint32_t SR;
+	volatile uint32_t DR;
+	volatile uint32_t CRCPR;
+	volatile uint32_t RXCRCR;
+	volatile uint32_t TXCRCR;
+	volatile uint32_t I2SCFGR;
+	volatile uint32_t I2SPR;
+}SPIx_Reg_t;
+
+
+typedef struct{
+	volatile uint32_t CR;
+	volatile uint32_t PLLCFGR;
+	volatile uint32_t CFGR;
+	volatile uint32_t CIR;
+	volatile uint32_t AHB1RSTR;
+	volatile uint32_t AHB2RSTR;
+	volatile uint32_t AHB3RSTR;
+	volatile uint32_t Reserved;
+	volatile uint32_t APB1RSTR;
+	volatile uint32_t APB2RSTR;
+	volatile uint32_t Reserved1;
+	volatile uint32_t Reserved2;
+	volatile uint32_t AHB1ENR;
+	volatile uint32_t AHB2ENR;
+	volatile uint32_t AHB3ENR;
+	volatile uint32_t Reserved3;
+	volatile uint32_t APB1ENR;
+	volatile uint32_t APB2ENR;
+	volatile uint32_t Reserved4;
+	volatile uint32_t Reserved5;
+	volatile uint32_t AHB1LPENR;
+	volatile uint32_t AHB2LPENR;
+	volatile uint32_t AHB3LPENR;
+	volatile uint32_t Reserved6;
+	volatile uint32_t APB1LPENR;
+	volatile uint32_t APB2LPENR;
+	volatile uint32_t Reserved7;
+	volatile uint32_t Reserved8;
+	volatile uint32_t BDCR;
+	volatile uint32_t CSR;
+	volatile uint32_t Reserved9;
+	volatile uint32_t Reserved10;
+	volatile uint32_t SSCGR;
+	volatile uint32_t PLLI2SCFGR;
+}RCC_reg_t;
+
+typedef struct{
+	volatile uint32_t IMR;
+	volatile uint32_t EMR;
+	volatile uint32_t RTSR;
+	volatile uint32_t FTRS;
+	volatile uint32_t SWIER;
+	volatile uint32_t PR;
+}EXTI_Reg_t;
+
+typedef struct{
+	volatile uint32_t MEMRMP;
+	volatile uint32_t PMC;
+	volatile uint32_t EXTI_CR[4];
+	volatile uint32_t CMPCR;
+}SYSCFG_Reg_t;
+
+typedef struct{
+	volatile uint32_t CR1;
+	volatile uint32_t CR2;
+	volatile uint32_t OAR1;
+	volatile uint32_t OAR2;
+	volatile uint32_t DR;
+	volatile uint32_t SR1;
+	volatile uint32_t SR2;
+	volatile uint32_t CCR;
+	volatile uint32_t TRISE;
+	volatile uint32_t FLTR;
+}I2Cx_Reg_t;
+
+typedef struct{
+	volatile uint32_t SR;
+	volatile uint32_t DR;
+	volatile uint32_t BRR;
+	volatile uint32_t CR1;
+	volatile uint32_t CR2;
+	volatile uint32_t CR3;
+	volatile uint32_t GTPR;
+}USARTx_Reg_t;
+
+#define SYSCFG_REG				((SYSCFG_Reg_t*)SYSCFG)
+#define EXTI_REG				((EXTI_Reg_t*)EXTI)
+#define RCC_REG					((RCC_reg_t*)RCC)
+
+#define GPIOA_REG				(GPIOx_Reg_t*)GPIOA
+#define GPIOB_REG				(GPIOx_Reg_t*)GPIOB
+#define GPIOC_REG				(GPIOx_Reg_t*)GPIOC
+#define GPIOD_REG				(GPIOx_Reg_t*)GPIOD
+#define GPIOE_REG				(GPIOx_Reg_t*)GPIOE
+#define GPIOF_REG				(GPIOx_Reg_t*)GPIOF
+#define GPIOG_REG				(GPIOx_Reg_t*)GPIOG
+#define GPIOH_REG				(GPIOx_Reg_t*)GPIOH
+#define GPIOI_REG				(GPIOx_Reg_t*)GPIOI
+
+#define SPI1_REG				((SPIx_Reg_t* )SPI1)
+#define SPI2_REG				((SPIx_Reg_t* )SPI2)
+#define SPI3_REG				((SPIx_Reg_t* )SPI3)
+
+#define I2C1_REG				((I2Cx_Reg_t* )I2C1)
+#define I2C2_REG				((I2Cx_Reg_t* )I2C2)
+#define I2C3_REG				((I2Cx_Reg_t* )I2C3)
+
+#define USART1_REG				((USARTx_Reg_t*)USART1)
+#define USART2_REG				((USARTx_Reg_t*)USART2)
+#define USART3_REG				((USARTx_Reg_t*)USART3)
+#define UART4_REG				((USARTx_Reg_t*)UART4)
+#define UART5_REG				((USARTx_Reg_t*)UART5)
+#define USART6_REG				((USARTx_Reg_t*)USART6)
+
+#define EXTI0_IRQ_NO			6
+#define EXTI1_IRQ_NO			7
+#define EXTI2_IRQ_NO			8
+#define EXTI3_IRQ_NO			9
+#define EXTI4_IRQ_NO			10
+#define EXTI5_9_IRQ_NO			23
+#define EXTI10_15_IRQ_NO		40
+
+#define SPI1_IRQ_NO				35
+#define SPI2_IRQ_NO				36
+#define SPI3_IRQ_NO				51
+
+#define I2C1_EV_IRQ_NO			31
+#define I2C1_ER_IRQ_NO			32
+#define I2C2_EV_IRQ_NO			33
+#define I2C2_ER_IRQ_NO			34
+#define I2C3_EV_IRQ_NO			72
+#define I2C3_ER_IRQ_NO			73
+
+#define USART1_IRQ_NO			37
+#define USART2_IRQ_NO			38
+#define USART3_IRQ_NO			39
+#define UART4_IRQ_NO			52
+#define UART5_IRQ_NO			53
+#define USART6_IRQ_NO			71
+
+
+#define SPI1_ENABLE()			((RCC_REG -> APB2ENR) |= (1<<12))
+#define SPI2_ENABLE()			((RCC_REG -> APB1ENR) |= (1<<14))
+#define SPI3_ENABLE()			((RCC_REG -> APB1ENR) |= (1<<15))
+
+#define I2C1_ENABLE()			((RCC_REG -> APB1ENR) |= (1<<21))
+#define I2C2_ENABLE()			((RCC_REG -> APB1ENR) |= (1<<22))
+#define I2C3_ENABLE()			((RCC_REG -> APB1ENR) |= (1<<23))
+
+#define USART1_ENABLE()			((RCC_REG -> APB2ENR) |= (1<<4))
+#define USART2_ENABLE()			((RCC_REG -> APB1ENR) |= (1<<17))
+#define USART3_ENABLE()			((RCC_REG -> APB1ENR) |= (1<<18))
+#define UART4_ENABLE()			((RCC_REG -> APB1ENR) |= (1<<19))
+#define UART5_ENABLE()			((RCC_REG -> APB1ENR) |= (1<<20))
+#define USART6_ENABLE()			((RCC_REG -> APB2ENR) |= (1<<5))
+
+#define SYSCFG_ENABLE()			((RCC_REG -> APB2ENR) |= (1<<14))
+
+#define GPIOA_PCLK_EN()			((RCC_REG -> AHB1ENR) |= (1<<0))
+
+#define PORT_SELECT_EXTI(x)		((x==GPIOA_REG) ? 0:\
+								(x==GPIOB_REG) ? 1:\
+								(x==GPIOC_REG) ? 2:\
+								(x==GPIOD_REG) ? 3:\
+								(x==GPIOE_REG) ? 4:\
+								(x==GPIOF_REG) ? 5:\
+								(x==GPIOG_REG) ? 6:\
+								(x==GPIOH_REG) ? 7:0)
+
+#define ENABLE					1
+#define DISABLE					0
+#define SET						ENABLE
+#define RESET					DISABLE
+#define GPIO_SET				SET
+#define GPIO_RESET				RESET
+#define HIGH					ENABLE
+#define LOW						DISABLE
+#define FLAG_SET				SET
+#define FLAG_RESET				RESET
+
+//SPI_PHERIPHERAL_BITS
+
+#define SPI_CR1_CPHA			0
+#define SPI_CR1_CPOL			1
+#define SPI_CR1_MSTR			2
+#define SPI_CR1_BRD				3
+#define SPI_CR1_SPE				6
+#define SPI_CR1_LSBFIRST		7
+#define SPI_CR1_SSI				8
+#define SPI_CR1_SSM				9
+#define SPI_CR1_RXONLY			10
+#define SPI_CR1_DFF				11
+#define SPI_CR1_CRCNEXT			12
+#define SPI_CR1_CRCEN			13
+#define	SPI_CR1_BIDIOE			14
+#define	SPI_CR1_BIDIMODE		15
+
+#define SPI_CR2_RXDMAEN			0
+#define SPI_CR2_TXDMAEN			1
+#define SPI_CR2_SSOE			2
+#define SPI_CR2_FRF				4
+#define SPI_CR2_ERRIE			5
+#define SPI_CR2_RXNEIE			6
+#define SPI_CR2_TXNEIE			7
+
+#define SPI_SR_RXNE				0
+#define SPI_SR_TXE				1
+#define SPI_SR_CHSIDE			2
+#define SPI_SR_UDR				3
+#define SPI_SR_CRCERR			4
+#define SPI_SR_MODF				5
+#define SPI_SR_OVR				6
+#define SPI_SR_BSY				7
+#define SPI_SR_FRE				8
+
+//I2C Peripheral BITS
+
+#define I2C_CR1_PE				0
+#define I2C_CR1_SMBUS			1
+#define I2C_CR1_SMBTYPE			3
+#define I2C_CR1_ENARP			4
+#define I2C_CR1_ENPEC			5
+#define I2C_CR1_ENGC			6
+#define I2C_CR1_NOSTRETCH		7
+#define I2C_CR1_START			8
+#define I2C_CR1_STOP			9
+#define I2C_CR1_ACK				10
+#define I2C_CR1_POS				11
+#define I2C_CR1_PEC				12
+#define I2C_CR1_ALERT			13
+#define I2C_CR1_SWRST			15
+
+#define I2C_CR2_FREQ			0
+#define I2C_CR2_ITERREN			8
+#define I2C_CR2_ITEVTEN			9
+#define I2C_CR2_ITBUFEN			10
+#define I2C_CR2_DMAEN			11
+#define I2C_CR2_LAST			12
+
+#define I2C_SR1_SB				0
+#define I2C_SR1_ADDR			1
+#define I2C_SR1_BTF				2
+#define I2C_SR1_ADD10			3
+#define I2C_SR1_STOPF			4
+#define I2C_SR1_RXNE			6
+#define I2C_SR1_TXE				7
+#define I2C_SR1_BERR			8
+#define I2C_SR1_ARLO			9
+#define I2C_SR1_AF				10
+#define I2C_SR1_OVR				11
+#define I2C_SR1_PECERR			12
+#define I2C_SR1_TIMEOUT			14
+#define I2C_SR1_SMBALERT		15
+
+#define I2C_SR2_MSL				0
+#define I2C_SR2_BUSY			1
+#define I2C_SR2_TRA				2
+#define I2C_SR2_GENCALL			4
+#define I2C_SR2_SMBDEFAULT		5
+#define I2C_SR2_SMBHOST			6
+#define I2C_SR2_UALF			7
+#define I2C_SR2_PEC				8
+
+#define I2C_CCR_CCR				0
+#define I2C_CCR_DUTY			14
+#define I2C_CCR_FS				15
+
+
+#include "stm32f407_USART_drivers.h"
+#include "stm32f407_I2C_drivers.h"
+#include "stm32f407_GPIOx_drivers.h"
+#include "stm32f407_SPI_drivers.h"
+#include "stm32f407_RCC_drivers.h"
+#endif /* INC_STM32F407XX_H_ */

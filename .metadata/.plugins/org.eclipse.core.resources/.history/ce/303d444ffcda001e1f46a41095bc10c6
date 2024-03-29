@@ -1,0 +1,123 @@
+/*
+ * SPI_COMMU_Arduino.c
+ *
+ *  Created on: Mar 5, 2024
+ *      Author: ritik
+ */
+
+
+/*
+ * SPI_dataSend_testing.c
+ *
+ *  Created on: Mar 4, 2024
+ *      Author: ritik
+ */
+
+#include "stm32f407xx.h"
+#include<stdint.h>
+#include<stdio.h>
+#include<string.h>
+void delay(void){
+	for(int i=0;i<500000;i++);
+}
+void SPI2_inits(SPI_Handle_t *spi2){
+
+
+	SPI2_ENABLE();
+	spi2->pSPIx=SPI2_REG;
+
+	spi2->SPIConfig.Mode=SPI_DEVICE_MASTER;
+	spi2->SPIConfig.CPHA=CPHA_DI;
+	spi2->SPIConfig.CPOL=CPOL_DI;
+	spi2->SPIConfig.DFF = SHIFT_REGISTER_SIZE_8BITS;
+	spi2->SPIConfig.SSM=SPI_SSM_DI;
+	spi2->SPIConfig.SclkSpeed=SPI_DRIVER_SPEED_DIV256;
+	spi2->SPIConfig.BusConfig = SPI_BUS_FD;
+	SPI_init(spi2);
+
+
+
+}
+
+
+void GPIO_INITs(void){
+
+	GPIO_Handle_t gpioB;
+
+	gpioB.pGPIOx=GPIOB_REG;
+
+	gpioB.GPIO_PinConfig.PinMode=GPIO_MODE_ALTFUN;
+	gpioB.GPIO_PinConfig.PinAltFunMode=5;
+	gpioB.GPIO_PinConfig.PinOPType=GPIO_OP_TYPE_PP;
+	gpioB.GPIO_PinConfig.PinPuPdControl=GPIO_NO_PUPD;
+	gpioB.GPIO_PinConfig.PinSpeed=GPIO_OSPEED_LOW;
+
+	//SCLK
+	gpioB.GPIO_PinConfig.PinNumber=GPIO_PIN_NO_13;
+	GPIO_init(&gpioB);
+
+	//MISO
+//	gpioB.GPIO_PinConfig.PinNumber=GPIO_PIN_NO_14;
+//	GPIO_init(&gpioB);
+
+	//MOSI
+	gpioB.GPIO_PinConfig.PinNumber=GPIO_PIN_NO_15;
+	GPIO_init(&gpioB);
+
+	//NSS
+
+	gpioB.GPIO_PinConfig.PinNumber=GPIO_PIN_NO_12;
+	GPIO_init(&gpioB);
+
+	GPIO_Handle_t gpioE_btn;
+    /* Loop forever */
+
+
+	gpioE_btn.pGPIOx = GPIOE_REG;
+	gpioE_btn.GPIO_PinConfig.PinMode = GPIO_MODE_IN;
+
+	gpioE_btn.GPIO_PinConfig.PinNumber = GPIO_PIN_NO_3;
+	gpioE_btn.GPIO_PinConfig.PinOPType = GPIO_OP_TYPE_PP;
+	gpioE_btn.GPIO_PinConfig.PinPuPdControl = GPIO_PD;
+	gpioE_btn.GPIO_PinConfig.PinSpeed = GPIO_OSPEED_LOW;
+	gpioE_btn.GPIO_PinConfig.PinAltFunMode = 0;
+
+	GPIO_init(&gpioE_btn);
+
+}
+
+
+int main(){
+
+	SPI_Handle_t spi2;
+
+	GPIO_INITs();
+
+	SPI2_inits(&spi2);
+
+//	SSI_Config(SPI2_REG,ENABLE); //ONly when SSM is 1 or in software select mode
+	char user[]="Hello World!";
+	uint8_t data =strlen(user);
+	SSOE_Config(SPI2_REG,ENABLE); //for automatic management of low and high of nss pin
+	while(1){
+		while(GPIO_ReadFromInputPin(GPIOE_REG, 3)==HIGH);
+		delay();
+
+
+		SPI_Enable(SPI2_REG,ENABLE);
+		SPI_Send(SPI2_REG,&data, 1);
+
+		SPI_Send(SPI2_REG,(uint8_t*)user, strlen(user));
+
+		while(getFlag_Status(SPI2_REG, SPI_FLAG_BUSY));
+
+		SPI_Enable(SPI2_REG, DISABLE);
+
+	}
+
+
+
+
+	return 0;
+}
+

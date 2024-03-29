@@ -1,0 +1,148 @@
+/*
+ * 011_I2C_with_interrupt.c
+ *
+ *  Created on: Mar 26, 2024
+ *      Author: ritik
+ */
+
+
+
+#include "stm32f407xx.h"
+#include<stdint.h>
+#include<stdio.h>
+#include<string.h>
+uint8_t comm =0x51;
+uint8_t Rx_flag=RESET;
+
+I2C_Handle_t i2c1;
+
+void delay(void){
+	for(int i=0;i<500000;i++);
+}
+void delay1(void){
+	for(int i=0;i<200;i++);
+}
+
+
+
+void I2C1_inits(I2C_Handle_t *pI2CHandle){
+
+	pI2CHandle->pI2Cx = I2C1_REG;
+
+
+	pI2CHandle->I2CConfig.I2C_ACKControl = I2C_ACK_ENABLE;
+	pI2CHandle->I2CConfig.I2C_DeviceAddress = 0x61;
+	pI2CHandle->I2CConfig.I2C_FMDutyCycle = I2C_FM_DUTY_2;
+	pI2CHandle->I2CConfig.I2C_SCLSpeed = I2C_SCL_SPEED_STD;
+
+
+	I2C_init(pI2CHandle);
+
+}
+
+
+void GPIO_INITs(void){
+
+	GPIO_Handle_t gpioB;
+
+	gpioB.pGPIOx=GPIOB_REG;
+
+	gpioB.GPIO_PinConfig.PinMode=GPIO_MODE_ALTFUN;
+	gpioB.GPIO_PinConfig.PinAltFunMode=4;
+	gpioB.GPIO_PinConfig.PinOPType=GPIO_OP_TYPE_OD;
+	gpioB.GPIO_PinConfig.PinPuPdControl=GPIO_PU;
+	gpioB.GPIO_PinConfig.PinSpeed=GPIO_OSPEED_MED;
+
+	//SCL
+	gpioB.GPIO_PinConfig.PinNumber=GPIO_PIN_NO_8;
+	GPIO_init(&gpioB);
+
+	//SDA
+	gpioB.GPIO_PinConfig.PinNumber=GPIO_PIN_NO_9;
+	GPIO_init(&gpioB);
+
+	GPIO_Handle_t gpioE_btn;
+    /* Loop forever */
+
+
+	gpioE_btn.pGPIOx = GPIOE_REG;
+	gpioE_btn.GPIO_PinConfig.PinMode = GPIO_MODE_IT_FT;
+
+	gpioE_btn.GPIO_PinConfig.PinNumber = GPIO_PIN_NO_3;
+	gpioE_btn.GPIO_PinConfig.PinOPType = GPIO_OP_TYPE_PP;
+	gpioE_btn.GPIO_PinConfig.PinPuPdControl = GPIO_PU;
+	gpioE_btn.GPIO_PinConfig.PinSpeed = GPIO_OSPEED_MED;
+	gpioE_btn.GPIO_PinConfig.PinAltFunMode = 0;
+
+	GPIO_init(&gpioE_btn);
+
+
+	GPIO_IRQConfig(EXTI3_IRQ_NO, ENABLE);
+	GPIO_IRQ_Set_Priority(EXTI3_IRQ_NO, 15);
+
+}
+
+
+int main(){
+
+
+
+	GPIO_INITs();
+
+	I2C1_inits(&i2c1);
+
+	I2C_IRQConfig(I2C1_EV_IRQ_NO, ENABLE);
+	I2C_IRQConfig(I2C1_ER_IRQ_NO, ENABLE);
+
+	I2C_Enable(I2C1_REG, ENABLE);
+
+	Manage_Acking(&i2c1,ENABLE);
+
+
+	while(1);
+	return 0;
+}
+void EXTI3_IRQHandler(void){
+	delay();
+	GPIO_IRQHandling(GPIO_PIN_NO_3);
+//	uint8_t some[] ="We sends this data\n";
+	uint8_t Len=0;
+
+	while(I2C_SendDataIT(&i2c1, &(comm-1), 1, 0x68, ENABLE)!=I2C_READY);
+	comm=0x52;
+	while(I2C_RecieveDataIT(&i2c1, &Len, 1,0x68 , ENABLE)!=I2C_READY);
+
+	while(I2C_SendDataIT(&i2c1, &comm, 1, 0x68, ENABLE)!=I2C_READY);
+	uint8_t some[Len];
+
+	while(I2C_RecieveDataIT(&i2c1, some,23 , 0x68,DISABLE)!=I2C_READY);
+//	Rx_flag=RESET;
+//	while(Rx_flag != SET);
+	delay();
+	printf("%d \n",(uint8_t)Len);
+	printf("%s\n",some);
+	Rx_flag =RESET;
+}
+
+void I2C1_EV_IRQHandler(void){
+	I2C_EV_IRQHandling(&i2c1);
+}
+
+void I2C1_ER_IRQHandler(void){
+	I2C_ERR_IRQHandling(&i2c1);
+}
+
+void I2C_ApplicationCallBack(I2C_Handle_t *pI2CHandle,uint8_t AppEv){
+	if(AppEv==I2C_EV_TX_COMPLT){
+		printf("Tx is completed.\n");
+	}else if(AppEv==I2C_EV_RX_COMPLT){
+		Rx_flag=SET;
+		printf("Rx is completed.\n");
+	}else if(AppEv == I2C_ERROR_AF){
+		printf("Ack not recieved.\n");
+		I2C_CloseSendData(pI2CHandle);
+		I2CGenerateStopCondition(pI2CHandle->pI2Cx);
+		while(1);
+	}
+}
+

@@ -1,0 +1,55 @@
+/*
+ * stm32f407_I2C_drivers.h
+ *
+ *  Created on: Mar 14, 2024
+ *      Author: ritik
+ */
+#include<stdint.h>
+#include "stm32f407xx.h"
+#ifndef INC_STM32F407_I2C_DRIVERS_H_
+#define INC_STM32F407_I2C_DRIVERS_H_
+
+typedef struct{
+	volatile uint8_t I2C_SCLSpeed;
+	volatile uint8_t I2C_DeviceAddress;
+	volatile uint8_t I2C_ACKControl;
+	volatile uint8_t I2C_FMDutyCycle;
+}I2C_Config_t;
+
+typedef struct{
+	  I2Cx_Reg_t *pI2Cx;
+	  I2C_Config_t I2CConfig;
+}I2C_Handle_t;
+
+void I2C_PeriClockControl(I2Cx_Reg_t *pGPIOx, uint8_t EnorDi);
+
+void I2C_init(I2C_Handle_t *pI2CHandle);
+void I2C_deinit(I2Cx_Reg_t *pI2Cx);
+
+void I2C_SendData();
+
+
+void I2C_IRQConfig(uint8_t IRQNumber, uint8_t EnorDi);
+
+void I2C_IRQ_Set_Priority(uint8_t IRQNumber,uint32_t IRQPriority);
+
+uint8_t I2C_getFlag_Status(I2Cx_Reg_t *pI2Cx, uint8_t flag);
+
+void I2C_Enable(I2Cx_Reg_t *pI2Cx, uint8_t EnorDi);
+
+
+
+
+
+#define I2C_SCL_SPEED_STD		100000
+#define I2C_SCL_SPEED_FAST		400000
+#define I2C_SCL_SPEED_FAST_2	200000
+
+#define I2C_ACK_ENABLE			1
+#define I2C_ACK_DISABle			0
+
+#define I2C_FM_DUTY_2			0
+#define I2C_FM_DUTY_16_9		1
+
+
+#endif /* INC_STM32F407_I2C_DRIVERS_H_ */

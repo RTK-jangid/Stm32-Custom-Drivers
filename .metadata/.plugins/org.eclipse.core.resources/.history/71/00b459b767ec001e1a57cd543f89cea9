@@ -1,0 +1,28 @@
+/*
+ * stm32f407_USART_drivers.h
+ *
+ *  Created on: Mar 27, 2024
+ *      Author: ritik
+ */
+
+#ifndef INC_STM32F407_USART_DRIVERS_H_
+#define INC_STM32F407_USART_DRIVERS_H_
+
+typedef struct{
+	volatile uint8_t Mode;
+	volatile uint8_t BAUD;
+	volatile uint8_t No_of_Stop_Bits;
+	volatile uint8_t Parity_Ctrl;
+	volatile uint8_t HW_Flow_Ctrl;
+	volatile uint8_t WordLength;
+}USART_Config_t;
+
+typedef struct{
+	  USARTx_Reg_t *pUARTx;
+	  USART_Config_t SPIConfig;
+}USART_Handle_t;
+
+
+
+
+#endif /* INC_STM32F407_USART_DRIVERS_H_ */

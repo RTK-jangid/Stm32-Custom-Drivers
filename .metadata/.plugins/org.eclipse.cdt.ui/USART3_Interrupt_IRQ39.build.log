@@ -1,0 +1,10 @@
+15:18:49 **** Incremental Build of configuration Debug for project USART3_Interrupt_IRQ39 ****
+make -j12 all 
+arm-none-eabi-size  USART3_Interrupt_IRQ39.elf 
+   text	   data	    bss	    dec	    hex	filename
+   3380	    100	   1900	   5380	   1504	USART3_Interrupt_IRQ39.elf
+Finished building: default.size.stdout
+ 
+
+15:18:49 Build Finished. 0 errors, 0 warnings. (took 169ms)
+

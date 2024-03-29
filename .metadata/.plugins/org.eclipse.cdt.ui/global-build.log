@@ -1,0 +1,110 @@
+00:40:37 **** Incremental Build of configuration Debug for project stm32_drivers ****
+make -j12 all 
+arm-none-eabi-gcc "../drivers/Src/stm32f407_USART_drivers.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F407VETx -c -I../Inc -I"/home/ritik/STM32CubeIDE/workspace_1.14.0/stm32_drivers/drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"drivers/Src/stm32f407_USART_drivers.d" -MT"drivers/Src/stm32f407_USART_drivers.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "drivers/Src/stm32f407_USART_drivers.o"
+arm-none-eabi-gcc "../Src/011UART_TX_RX_WITH_INTERRUPT.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F407VETx -c -I../Inc -I"/home/ritik/STM32CubeIDE/workspace_1.14.0/stm32_drivers/drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/011UART_TX_RX_WITH_INTERRUPT.d" -MT"Src/011UART_TX_RX_WITH_INTERRUPT.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/011UART_TX_RX_WITH_INTERRUPT.o"
+arm-none-eabi-gcc -o "stm32_drivers.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/ritik/STM32CubeIDE/workspace_1.14.0/stm32_drivers/STM32F407VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="stm32_drivers.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: stm32_drivers.elf
+ 
+arm-none-eabi-size  stm32_drivers.elf 
+arm-none-eabi-objdump -h -S stm32_drivers.elf  > "stm32_drivers.list"
+   text	   data	    bss	    dec	    hex	filename
+   9476	    148	   2972	  12596	   3134	stm32_drivers.elf
+Finished building: default.size.stdout
+ 
+Finished building: stm32_drivers.list
+ 
+00:41:15 **** Incremental Build of configuration Debug for project stm32_drivers ****
+make -j12 all 
+arm-none-eabi-size  stm32_drivers.elf 
+   text	   data	    bss	    dec	    hex	filename
+   9476	    148	   2972	  12596	   3134	stm32_drivers.elf
+Finished building: default.size.stdout
+ 
+00:42:32 **** Incremental Build of configuration Debug for project stm32_drivers ****
+make -j12 all 
+arm-none-eabi-gcc "../Src/011UART_TX_RX_WITH_INTERRUPT.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F407VETx -c -I../Inc -I"/home/ritik/STM32CubeIDE/workspace_1.14.0/stm32_drivers/drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/011UART_TX_RX_WITH_INTERRUPT.d" -MT"Src/011UART_TX_RX_WITH_INTERRUPT.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/011UART_TX_RX_WITH_INTERRUPT.o"
+arm-none-eabi-gcc -o "stm32_drivers.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/ritik/STM32CubeIDE/workspace_1.14.0/stm32_drivers/STM32F407VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="stm32_drivers.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: stm32_drivers.elf
+ 
+arm-none-eabi-size  stm32_drivers.elf 
+arm-none-eabi-objdump -h -S stm32_drivers.elf  > "stm32_drivers.list"
+   text	   data	    bss	    dec	    hex	filename
+   9452	    148	   2972	  12572	   311c	stm32_drivers.elf
+Finished building: default.size.stdout
+ 
+Finished building: stm32_drivers.list
+ 
+00:46:33 **** Incremental Build of configuration Debug for project stm32_drivers ****
+make -j12 all 
+arm-none-eabi-gcc "../drivers/Src/stm32f407_USART_drivers.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F407VETx -c -I../Inc -I"/home/ritik/STM32CubeIDE/workspace_1.14.0/stm32_drivers/drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"drivers/Src/stm32f407_USART_drivers.d" -MT"drivers/Src/stm32f407_USART_drivers.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "drivers/Src/stm32f407_USART_drivers.o"
+arm-none-eabi-gcc "../Src/011UART_TX_RX_WITH_INTERRUPT.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F407VETx -c -I../Inc -I"/home/ritik/STM32CubeIDE/workspace_1.14.0/stm32_drivers/drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/011UART_TX_RX_WITH_INTERRUPT.d" -MT"Src/011UART_TX_RX_WITH_INTERRUPT.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/011UART_TX_RX_WITH_INTERRUPT.o"
+../drivers/Src/stm32f407_USART_drivers.c: In function 'USART_IRQHandling':
+../drivers/Src/stm32f407_USART_drivers.c:588:47: error: 's' undeclared (first use in this function)
+  588 |                         pUSARTHandle->RxLen--;s
+      |                                               ^
+../drivers/Src/stm32f407_USART_drivers.c:588:47: note: each undeclared identifier is reported only once for each function it appears in
+../drivers/Src/stm32f407_USART_drivers.c:588:48: error: expected ';' before 'if'
+  588 |                         pUSARTHandle->RxLen--;s
+      |                                                ^
+      |                                                ;
+  589 |                         if(pUSARTHandle->RxLen==0){
+      |                         ~~                      
+make: *** [drivers/Src/subdir.mk:31: drivers/Src/stm32f407_USART_drivers.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+00:46:47 **** Incremental Build of configuration Debug for project stm32_drivers ****
+make -j12 all 
+arm-none-eabi-gcc "../drivers/Src/stm32f407_USART_drivers.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F407VETx -c -I../Inc -I"/home/ritik/STM32CubeIDE/workspace_1.14.0/stm32_drivers/drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"drivers/Src/stm32f407_USART_drivers.d" -MT"drivers/Src/stm32f407_USART_drivers.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "drivers/Src/stm32f407_USART_drivers.o"
+arm-none-eabi-gcc -o "stm32_drivers.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/ritik/STM32CubeIDE/workspace_1.14.0/stm32_drivers/STM32F407VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="stm32_drivers.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: stm32_drivers.elf
+ 
+arm-none-eabi-size  stm32_drivers.elf 
+arm-none-eabi-objdump -h -S stm32_drivers.elf  > "stm32_drivers.list"
+   text	   data	    bss	    dec	    hex	filename
+   9596	    148	   2972	  12716	   31ac	stm32_drivers.elf
+Finished building: default.size.stdout
+ 
+Finished building: stm32_drivers.list
+ 
+00:47:08 **** Incremental Build of configuration Debug for project stm32_drivers ****
+make -j12 all 
+arm-none-eabi-gcc "../Src/011UART_TX_RX_WITH_INTERRUPT.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F407VETx -c -I../Inc -I"/home/ritik/STM32CubeIDE/workspace_1.14.0/stm32_drivers/drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/011UART_TX_RX_WITH_INTERRUPT.d" -MT"Src/011UART_TX_RX_WITH_INTERRUPT.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/011UART_TX_RX_WITH_INTERRUPT.o"
+arm-none-eabi-gcc -o "stm32_drivers.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/ritik/STM32CubeIDE/workspace_1.14.0/stm32_drivers/STM32F407VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="stm32_drivers.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: stm32_drivers.elf
+ 
+arm-none-eabi-size  stm32_drivers.elf 
+arm-none-eabi-objdump -h -S stm32_drivers.elf  > "stm32_drivers.list"
+   text	   data	    bss	    dec	    hex	filename
+   9608	    148	   2972	  12728	   31b8	stm32_drivers.elf
+Finished building: default.size.stdout
+ 
+Finished building: stm32_drivers.list
+ 
+00:50:00 **** Incremental Build of configuration Debug for project stm32_drivers ****
+make -j12 all 
+arm-none-eabi-gcc "../Src/011UART_TX_RX_WITH_INTERRUPT.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F407VETx -c -I../Inc -I"/home/ritik/STM32CubeIDE/workspace_1.14.0/stm32_drivers/drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/011UART_TX_RX_WITH_INTERRUPT.d" -MT"Src/011UART_TX_RX_WITH_INTERRUPT.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/011UART_TX_RX_WITH_INTERRUPT.o"
+arm-none-eabi-gcc -o "stm32_drivers.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/ritik/STM32CubeIDE/workspace_1.14.0/stm32_drivers/STM32F407VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="stm32_drivers.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: stm32_drivers.elf
+ 
+arm-none-eabi-size  stm32_drivers.elf 
+arm-none-eabi-objdump -h -S stm32_drivers.elf  > "stm32_drivers.list"
+   text	   data	    bss	    dec	    hex	filename
+   9608	    148	   2972	  12728	   31b8	stm32_drivers.elf
+Finished building: default.size.stdout
+ 
+Finished building: stm32_drivers.list
+ 
+00:51:53 **** Incremental Build of configuration Debug for project stm32_drivers ****
+make -j12 all 
+arm-none-eabi-gcc "../Src/011UART_TX_RX_WITH_INTERRUPT.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F407VETx -c -I../Inc -I"/home/ritik/STM32CubeIDE/workspace_1.14.0/stm32_drivers/drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/011UART_TX_RX_WITH_INTERRUPT.d" -MT"Src/011UART_TX_RX_WITH_INTERRUPT.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/011UART_TX_RX_WITH_INTERRUPT.o"
+arm-none-eabi-gcc -o "stm32_drivers.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/ritik/STM32CubeIDE/workspace_1.14.0/stm32_drivers/STM32F407VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="stm32_drivers.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: stm32_drivers.elf
+ 
+arm-none-eabi-size  stm32_drivers.elf 
+arm-none-eabi-objdump -h -S stm32_drivers.elf  > "stm32_drivers.list"
+   text	   data	    bss	    dec	    hex	filename
+   9608	    148	   2972	  12728	   31b8	stm32_drivers.elf
+Finished building: default.size.stdout
+ 
+Finished building: stm32_drivers.list
+ 

@@ -1,0 +1,18 @@
+/*
+ * stm32f407_RCC_drivers.h
+ *
+ *  Created on: Mar 28, 2024
+ *      Author: ritik
+ */
+#include "stm32f407xx.h"
+#ifndef INC_STM32F407_RCC_DRIVERS_H_
+#define INC_STM32F407_RCC_DRIVERS_H_
+
+uint32_t RCC_getPLLOutputClock(void);
+uint32_t RCC_GetPCLK1Value(void);
+
+uint32_t RCC_GetPCLK2Value(void);
+
+
+
+#endif /* INC_STM32F407_RCC_DRIVERS_H_ */
